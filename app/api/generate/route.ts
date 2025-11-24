@@ -63,9 +63,17 @@ export async function POST(req: Request) {
 
     const message = completion.choices[0]?.message?.content?.trim() ?? "";
 
+    // Some responses might include prose before/after the JSON payload.
+    const start = message.indexOf("[");
+    const end = message.lastIndexOf("]");
+    const jsonPayload =
+      start !== -1 && end !== -1 && end > start
+        ? message.slice(start, end + 1)
+        : message;
+
     let parsed: unknown;
     try {
-      parsed = JSON.parse(message);
+      parsed = JSON.parse(jsonPayload);
     } catch (err) {
       return NextResponse.json(
         { error: "AI response was not valid JSON. Please try again." },
