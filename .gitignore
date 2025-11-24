@@ -3,3 +3,7 @@ dist
 build
 .DS_Store
 *.log
+.next
+.env
+.env.local
+.vercel

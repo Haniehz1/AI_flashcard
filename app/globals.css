@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.card-surface {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.flip-card {
+  perspective: 1400px;
+}
+
+.flip-inner {
+  transition: transform 0.6s var(--tw-transition-timing-function, ease);
+  transform-style: preserve-3d;
+}
+
+.flip-face {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.flip-face.back {
+  transform: rotateY(180deg);
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
